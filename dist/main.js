@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("console.log('hellosd')\n\n//# sourceURL=webpack://userinterfacepractice/./src/index.js?");
+eval("// Create content container\nconst content = document.createElement('div');\ncontent.classList.add('content');\ndocument.body.appendChild(content);\n\n// Create dropdown factory function\nconst createDropdownContainer  = () => {\n  const dropdownContainer = document.createElement('div');\n  dropdownContainer.classList.add('dropdownContainer');\n\n  \n\n  content.appendChild(dropdownContainer);\n}\n\ncreateDropdownContainer();\n\n//# sourceURL=webpack://userinterfacepractice/./src/index.js?");
 
 /***/ })
 
