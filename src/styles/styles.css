@@ -1,0 +1,79 @@
+:root {
+  --backgroundColor: rgb(47, 58, 78);
+  --backgroundColorLight: rgb(94, 110, 139);
+  --bodyColor: rgb(145, 163, 197);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  min-height: 100vh;
+  background-color: var(--bodyColor);
+}
+
+p, li {
+  font-size: 20px;
+  color: white;
+}
+
+.dropdownSection {
+  display: flex;
+}
+
+.dropdownContainer {
+  position: relative;
+  width: 400px;
+  padding: 1em;
+}
+
+.dropdownTitle {
+  background-color: var(--backgroundColor);
+  padding: 1em;
+  cursor: pointer;
+  border-radius: 0.5em;
+}
+
+.dropdownTitle:hover {
+  background-color: var(--backgroundColorLight);
+}
+
+.dropdownTitleClicked {
+  border: 2px solid rgb(27, 255, 46);
+}
+
+.list {
+  position: absolute;
+  z-index: 1;
+  top: 90px;
+  width: calc(100% - 2em);
+
+  background-color: var(--backgroundColorLight);
+  list-style: none;
+
+  padding: 1em;
+  border-radius: 0.5em;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.listItems {
+  cursor: pointer;
+  padding: 0.5em 0.2em;
+
+  border-radius: 0.5em;
+}
+
+.listItems:hover {
+  background-color: var(--backgroundColor);
+}
+
+.listHidden {
+  display: none;
+}
