@@ -1,5 +1,16 @@
 import './styles/styles.css';
 
+// Import image src
+import Bulbasaur from './images/bulbasaur.png';
+import Ivysaur from './images/ivysaur.png';
+import Venusaur from './images/venusaur.png';
+import Charmander from './images/charmander.png';
+import Charmeleon from './images/charmeleon.png';
+import Charizard from './images/charizard.png';
+import Squirtle from './images/squirtle.png';
+import Wartortle from './images/wartortle.png';
+import Blastoise from './images/blastoise.png';
+
 // Create content container
 const content = document.createElement('div');
 content.classList.add('content');
@@ -13,6 +24,10 @@ content.appendChild(dropdownSection);
 // Create header section
 const headerContainer = document.createElement('div');
 headerContainer.classList.add('headerContainer');
+
+// Create image carousell section
+const imageCarousellSection = document.createElement('div');
+imageCarousellSection.classList.add('imageCarousellSection');
 
 // Create header factory function
 const createHeader = (titleName, ...items) => {
@@ -73,6 +88,65 @@ const createDropdownContainer = (titleName, ...items) => {
   return dropdownContainer;
 };
 
+// Creat image carousell factory function
+const createImageCarousell = (...imageSrc) => {
+
+  // Create image array
+  const imageArray = [];
+
+  for (let i = 0; i < imageSrc.length; i++) {
+    imageArray.push(imageSrc[i]);
+  }
+
+  // Create current image number
+  let currentImageIndex = 0;
+
+  // Create Image container
+  const imageContainer = document.createElement('div');
+
+  // Render image function
+  const renderImage = () => {
+    imageContainer.textContent = '';
+    const renderedImage = document.createElement('img');
+    renderedImage.src = imageArray[currentImageIndex];
+    imageContainer.appendChild(renderedImage);
+  } 
+  renderImage();
+
+  // Create previous button
+  const btnPrevious = document.createElement('button');
+  btnPrevious.textContent = 'Previous';
+  btnPrevious.addEventListener('click', () => {
+    if (currentImageIndex > 0) {
+      currentImageIndex--;
+      renderImage();
+    }
+    else {
+      currentImageIndex = (imageArray.length - 1);
+      renderImage();
+    }
+  });
+
+  // Create next button
+  const btnNext = document.createElement('button');
+  btnNext.textContent = 'Next';
+  btnNext.addEventListener('click', () => {
+    if (currentImageIndex < (imageArray.length - 1)) {
+      currentImageIndex++;
+      renderImage();
+    }
+    else {
+      currentImageIndex = 0;
+      renderImage();
+    }
+  });
+
+  imageCarousellSection.appendChild(btnPrevious);
+  imageCarousellSection.appendChild(btnNext);
+  imageCarousellSection.appendChild(imageContainer);
+  content.appendChild(imageCarousellSection);
+}
+
 // Create header content
 createHeader('Kingslayer', 'Home', 'News', 'About', 'Contact', 'Settings');
 
@@ -93,3 +167,5 @@ const itemDropdownMenu = createDropdownContainer(
   'Keyboard',
 );
 dropdownSection.appendChild(itemDropdownMenu);
+
+createImageCarousell(Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise);
