@@ -30,9 +30,10 @@ body {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 10% 1fr;
+  grid-template-rows: 10% 1fr 4fr;
 }
 
+/* Header section */
 .headerContainer {
   grid-row: 1 / 2;
 
@@ -71,6 +72,7 @@ body {
   border-bottom: 4px solid white;
 }
 
+/* Dropdown Menu section */
 .dropdownSection {
   grid-row: 2 / 3;
   display: flex;
@@ -127,4 +129,26 @@ body {
 
 .listHidden {
   display: none;
+}
+
+/* Image carousell section */
+.imageCarousellSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageContainer {
+  border: 2px solid var(--backgroundColor);
+  border-radius: 1rem;
+}
+
+.btnNext,
+.btnPrevious {
+  height: 100px;
+}
+
+.btnNext:hover,
+.btnPrevious:hover {
+  cursor: pointer;
 }

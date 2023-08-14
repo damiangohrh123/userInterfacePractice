@@ -10,6 +10,8 @@ import Charizard from './images/charizard.png';
 import Squirtle from './images/squirtle.png';
 import Wartortle from './images/wartortle.png';
 import Blastoise from './images/blastoise.png';
+import Next from './images/chevron-right.svg';
+import Previous from './images/chevron-left.svg';
 
 // Create content container
 const content = document.createElement('div');
@@ -90,7 +92,6 @@ const createDropdownContainer = (titleName, ...items) => {
 
 // Creat image carousell factory function
 const createImageCarousell = (...imageSrc) => {
-
   // Create image array
   const imageArray = [];
 
@@ -103,6 +104,7 @@ const createImageCarousell = (...imageSrc) => {
 
   // Create Image container
   const imageContainer = document.createElement('div');
+  imageContainer.classList.add('imageContainer');
 
   // Render image function
   const renderImage = () => {
@@ -110,42 +112,42 @@ const createImageCarousell = (...imageSrc) => {
     const renderedImage = document.createElement('img');
     renderedImage.src = imageArray[currentImageIndex];
     imageContainer.appendChild(renderedImage);
-  } 
+  };
   renderImage();
 
   // Create previous button
-  const btnPrevious = document.createElement('button');
-  btnPrevious.textContent = 'Previous';
+  const btnPrevious = document.createElement('img');
+  btnPrevious.classList.add('btnPrevious');
+  btnPrevious.src = Previous;
   btnPrevious.addEventListener('click', () => {
     if (currentImageIndex > 0) {
       currentImageIndex--;
       renderImage();
-    }
-    else {
-      currentImageIndex = (imageArray.length - 1);
+    } else {
+      currentImageIndex = imageArray.length - 1;
       renderImage();
     }
   });
 
   // Create next button
-  const btnNext = document.createElement('button');
-  btnNext.textContent = 'Next';
+  const btnNext = document.createElement('img');
+  btnNext.classList.add('btnNext');
+  btnNext.src = Next;
   btnNext.addEventListener('click', () => {
-    if (currentImageIndex < (imageArray.length - 1)) {
+    if (currentImageIndex < imageArray.length - 1) {
       currentImageIndex++;
       renderImage();
-    }
-    else {
+    } else {
       currentImageIndex = 0;
       renderImage();
     }
   });
 
   imageCarousellSection.appendChild(btnPrevious);
-  imageCarousellSection.appendChild(btnNext);
   imageCarousellSection.appendChild(imageContainer);
+  imageCarousellSection.appendChild(btnNext);
   content.appendChild(imageCarousellSection);
-}
+};
 
 // Create header content
 createHeader('Kingslayer', 'Home', 'News', 'About', 'Contact', 'Settings');
@@ -168,4 +170,14 @@ const itemDropdownMenu = createDropdownContainer(
 );
 dropdownSection.appendChild(itemDropdownMenu);
 
-createImageCarousell(Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard, Squirtle, Wartortle, Blastoise);
+createImageCarousell(
+  Bulbasaur,
+  Ivysaur,
+  Venusaur,
+  Charmander,
+  Charmeleon,
+  Charizard,
+  Squirtle,
+  Wartortle,
+  Blastoise,
+);
