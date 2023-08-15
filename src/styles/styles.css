@@ -1,7 +1,10 @@
 :root {
-  --backgroundColor: rgb(47, 58, 78);
-  --backgroundColorLight: rgb(94, 110, 139);
-  --bodyColor: rgb(145, 163, 197);
+  --backgroundColor: rgb(64, 83, 117);
+  --backgroundColorLight: rgb(103, 132, 170);
+  --bodyColor: rgb(235, 227, 206);
+  --lightgrey: rgb(214, 214, 214);
+  --grey: rgb(146, 146, 146);
+  --darkgrey: rgb(83, 83, 83);
 }
 
 * {
@@ -96,7 +99,7 @@ body {
 }
 
 .dropdownTitleClicked {
-  border: 2px solid rgb(27, 255, 46);
+  border: 2px solid rgb(46, 219, 60);
 }
 
 .list {
@@ -138,9 +141,21 @@ body {
   align-items: center;
 }
 
+.imageCarousellContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
 .imageContainer {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: white;
   border: 2px solid var(--backgroundColor);
   border-radius: 1rem;
+
+  transition: transform 0.5s ease-in-out;
 }
 
 .btnNext,
@@ -151,4 +166,30 @@ body {
 .btnNext:hover,
 .btnPrevious:hover {
   cursor: pointer;
+}
+
+.navigationContainer {
+  align-self: start;
+  grid-column: 2 / 3;
+
+  display: flex;
+  gap: 10px;
+
+  margin: 40px;
+  padding: 20px;
+
+  border-radius: 2rem;
+  background-color: var(--lightgrey);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navDot {
+  width: 15px;
+  height: 15px;
+  background-color: var(--grey);
+  border-radius: 50%;
+}
+
+.activeNavDot {
+  background-color: var(--darkgrey);
 }

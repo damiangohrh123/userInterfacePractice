@@ -92,15 +92,27 @@ const createDropdownContainer = (titleName, ...items) => {
 
 // Creat image carousell factory function
 const createImageCarousell = (...imageSrc) => {
+  // Create image carousell container
+  const imageCarousellContainer = document.createElement('div');
+  imageCarousellContainer.classList.add('imageCarousellContainer');
+
   // Create image array
   const imageArray = [];
 
+  // Create navigation dot array
+  const navigationContainer = document.createElement('div');
+  navigationContainer.classList.add('navigationContainer');
+
+  // Push arguments into imageArray
   for (let i = 0; i < imageSrc.length; i++) {
     imageArray.push(imageSrc[i]);
   }
 
   // Create current image number
   let currentImageIndex = 0;
+
+  // Declare auto scroll interval
+  let autoScrollInterval;
 
   // Create Image container
   const imageContainer = document.createElement('div');
@@ -113,7 +125,55 @@ const createImageCarousell = (...imageSrc) => {
     renderedImage.src = imageArray[currentImageIndex];
     imageContainer.appendChild(renderedImage);
   };
-  renderImage();
+
+  // Render navigation dots
+  const renderNavigation = () => {
+    navigationContainer.textContent = '';
+
+    // Create navigation dots
+    for (let i = 0; i < imageArray.length; i++) {
+      const navDot = document.createElement('div');
+      navDot.classList.add('navDot');
+
+      // Set the current image equal to the current dot
+      if (i === currentImageIndex) {
+        navDot.classList.add('activeNavDot');
+      }
+
+      navDot.addEventListener('click', (event) => {
+        const targetId = event.target.id;
+        currentImageIndex = parseInt(targetId);
+        renderImage();
+        renderNavigation();
+        stopAutoScroll();
+        startAutoScroll();
+      });
+
+      navDot.setAttribute('id', i);
+      navigationContainer.appendChild(navDot);
+    }
+  };
+
+  // Create auto scroll function
+  const autoScroll = () => {
+    if (currentImageIndex < imageArray.length - 1) {
+      currentImageIndex++;
+    } else {
+      currentImageIndex = 0;
+    }
+    renderImage();
+    renderNavigation();
+  };
+
+  // Create start auto scroll function
+  const startAutoScroll = () => {
+    autoScrollInterval = setInterval(autoScroll, 5000);
+  };
+
+  // Create stop auto scroll function
+  const stopAutoScroll = () => {
+    clearInterval(autoScrollInterval);
+  };
 
   // Create previous button
   const btnPrevious = document.createElement('img');
@@ -122,11 +182,13 @@ const createImageCarousell = (...imageSrc) => {
   btnPrevious.addEventListener('click', () => {
     if (currentImageIndex > 0) {
       currentImageIndex--;
-      renderImage();
     } else {
       currentImageIndex = imageArray.length - 1;
-      renderImage();
     }
+    renderImage();
+    renderNavigation();
+    stopAutoScroll();
+    startAutoScroll();
   });
 
   // Create next button
@@ -136,37 +198,56 @@ const createImageCarousell = (...imageSrc) => {
   btnNext.addEventListener('click', () => {
     if (currentImageIndex < imageArray.length - 1) {
       currentImageIndex++;
-      renderImage();
     } else {
       currentImageIndex = 0;
-      renderImage();
     }
+    renderImage();
+    renderNavigation();
+    stopAutoScroll();
+    startAutoScroll();
   });
 
-  imageCarousellSection.appendChild(btnPrevious);
-  imageCarousellSection.appendChild(imageContainer);
-  imageCarousellSection.appendChild(btnNext);
+  imageCarousellContainer.appendChild(btnPrevious);
+  imageCarousellContainer.appendChild(imageContainer);
+  imageCarousellContainer.appendChild(btnNext);
+  imageCarousellContainer.appendChild(navigationContainer);
+  imageCarousellSection.appendChild(imageCarousellContainer);
   content.appendChild(imageCarousellSection);
+
+  // Initial render and start auto scroll
+  renderImage();
+  startAutoScroll();
+  renderNavigation();
 };
 
 // Create header content
-createHeader('Kingslayer', 'Home', 'News', 'About', 'Contact', 'Settings');
+createHeader('Pokemon', 'Home', 'News', 'About', 'Contact', 'Settings');
 
 // Create food drop down menu
 const foodDropdownMenu = createDropdownContainer(
-  'Food List',
-  'Pizza',
-  'Sushi',
-  'Fried Rice',
+  'Generations',
+  'Pokémon Gold, Silver, and Crystal',
+  'Pokémon Ruby and Sapphire and Pokémon Emerald',
+  'Pokémon Diamond and Pearl and Pokémon Platinum',
+  'Pokémon Black and White',
+  'Pokémon X and Y',
+  'Pokémon Sun and Moon',
+  'Pokémon Sword and Shield',
+  'Pokémon Scarlet and Violet',
 );
 dropdownSection.appendChild(foodDropdownMenu);
 
 // Create item drop down menu
 const itemDropdownMenu = createDropdownContainer(
-  'Item List',
-  'Bowl',
-  'Phone',
-  'Keyboard',
+  'Regions',
+  'Kanto',
+  'Johto',
+  'Hoenn',
+  'Unova/Einall',
+  'Kalos',
+  'Alola',
+  'Galar',
+  'Paldea',
 );
 dropdownSection.appendChild(itemDropdownMenu);
 
