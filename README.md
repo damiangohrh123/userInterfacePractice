@@ -1,5 +1,8 @@
-# userInterfacePractice
+# User Interface Practice
 Creating Dynamic User Interface Interactions as practice
+
+## Live demo
+https://damiangohrh123.github.io/userInterfacePractice/
 
 -Error from line 143 to line 150
  *Function declared in a loop contains unsafe references to variable(s) 'currentImageIndex'*
